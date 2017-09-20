@@ -7,7 +7,8 @@ import matplotlib.gridspec as gridspec
 
 # filename='credit_card_small_out.csv'
 # filename='credit_card_few_features_med_out.csv'
-filename='credit_card_all_features_med_out.csv'
+# filename='credit_card_all_features_med_out.csv'
+filename='sim_fraud_small_out.csv'
 
 # Read data from the CSV file
 convertfunc = lambda x: datetime.strptime(x, '%Y-%m-%d %H:%M:%S')
@@ -42,10 +43,10 @@ ax.xaxis.set_major_formatter(xfmt)
 ax.xaxis_date()
 
 # Define anomaly graph settings
-anomalyGraph = fig.add_subplot(gs[1])
-plt.title("Anomaly scores")
-plt.ylabel('Percentage')
-plt.xlabel('Date')
+# anomalyGraph = fig.add_subplot(gs[1])
+# plt.title("Anomaly scores")
+# plt.ylabel('Percentage')
+# plt.xlabel('Date')
 
 # Maximizes window for a QT4Agg backend, which is the default for this environment
 figManager = plt.get_current_fig_manager()
@@ -59,13 +60,17 @@ plt.tight_layout()
 # Provide data to the 2 graphs
 mainGraph.plot_date(timestamp, amount, label="actual", linestyle='solid', marker='.')
 mainGraph.plot_date(timestamp, prediction, label="predicted", linestyle='solid', marker='.')
+# mainGraph.plot_date(timestamp, anomalyScore, label="score", linestyle='solid', marker='.')
+mainGraph.plot_date(timestamp, anomalyLikelihood, label="likelihood", linestyle='solid', marker='.')
+
 # Adding legend using the above labels
 mainGraph.legend(loc='upper left')
 
-anomalyGraph.plot_date(timestamp, anomalyScore, label="score", linestyle='solid', marker='.')
-anomalyGraph.plot_date(timestamp, anomalyLikelihood, label="likelihood", linestyle='solid', marker='.')
-# Adding legend using the above labels
-anomalyGraph.legend(loc='upper left')
+# Anomaly graph
+# anomalyGraph.plot_date(timestamp, anomalyScore, label="score", linestyle='solid', marker='.')
+# anomalyGraph.plot_date(timestamp, anomalyLikelihood, label="likelihood", linestyle='solid', marker='.')
+# # Adding legend using the above labels
+# anomalyGraph.legend(loc='upper left')
 
 
 plt.savefig('foo2.png')

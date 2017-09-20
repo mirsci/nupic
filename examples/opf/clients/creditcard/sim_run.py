@@ -170,7 +170,7 @@ def runIoThroughNupic(inputData, model, creditCardName, plot):
     # print("After %i records, 1-step altMAPE=%f", counter,
     #       result.metrics["multiStepBestPredictions:multiStep:"
     #                      "errorMetric='altMAPE':steps=1:window=1000:"
-    #                      "field=isFraud"])
+    #                      "field=isFraud"]) 
     prediction = result.inferences["multiStepBestPredictions"][1]
     anomalyScore = result.inferences["anomalyScore"]
     output.write(timestamp, isFraud, prediction, anomalyScore)
